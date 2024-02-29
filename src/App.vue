@@ -53,22 +53,12 @@ export default defineComponent({
     this.getStorageData();
   },
   methods: {
-    addTask(todo: Todo) {
-      //получаем данные из хранилища если они есть
-      this.getStorageData()
-      // записываем новые данные в массив
-      this.todoList.push(todo);
-      // и запишем изменения в LocalStorage
-      this.setStorageData();
-
-    },
     getStorageData() {
       if (localStorage.getItem("tasksGorbunov")) {
         // если данные есть, то получаем их из хранилища
-        let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
-        this.todoList = data;
+        this.todoList = JSON.parse(localStorage.getItem("tasksGorbunov")!);
       } else {
-        this.setStorageData()
+        this.setStorageData();
       }
     },
     setStorageData() {
@@ -76,6 +66,15 @@ export default defineComponent({
       const dataToSave = JSON.stringify(this.todoList);
       localStorage.setItem("tasksGorbunov", dataToSave);
     },
+    addTask(todo: Todo) {
+      //получаем данные из хранилища если они есть
+      this.getStorageData();
+      // записываем новые данные в массив
+      this.todoList.push(todo);
+      // и запишем изменения в LocalStorage
+      this.setStorageData();
+    },
+
     togglerToDo(id: number) {
       const targetToDo = this.todoList.find((todo: Todo) => todo.id === id);
       if (targetToDo) {
