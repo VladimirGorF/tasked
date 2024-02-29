@@ -56,15 +56,15 @@ export default defineComponent({
   },
   methods: {
     addTask(todo: Todo) {
-      // if (localStorage.getItem("tasksGorbunov")) {
-      //   // если данные есть, то получаем их из хранилища
-      //   let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
-      //   this.todoList = data;
-      // }
+      if (localStorage.getItem("tasksGorbunov")) {
+        // если данные есть, то получаем их из хранилища
+        let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
+        this.todoList = data;
+      }
       // записываем новые данные
       this.todoList.push(todo);
-      // const dataToSave = JSON.stringify(this.todoList);
-      // localStorage.setItem("tasksGorbunov", dataToSave);
+      const dataToSave = JSON.stringify(this.todoList);
+      localStorage.setItem("tasksGorbunov", dataToSave);
     },
     storageData() {
       if (localStorage.getItem("tasksGorbunov")) {
