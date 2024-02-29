@@ -12,18 +12,12 @@
     <button class="todo-item__remove-button" @click.stop="removeTask">
       <i class="bi bi-trash3"></i>
     </button>
-    <button
-      class="todo-item__remove-button"
-      @click.stop="showForm"
-    >
+    <button class="todo-item__remove-button" @click.stop="showForm">
       <i class="bi bi-pencil"></i>
     </button>
   </li>
-  <form
-    class="add-todo__form"
-    @submit.prevent="changeTask"
-    v-if="formVisible"
-  >
+  <!-- @submit.prevent предотвратит отправку формы -->
+  <form class="add-todo__form" @submit.prevent="changeTask" v-if="formVisible">
     <button class="close-button-changeForm" type="button" @click="closeForm">
       <i class="bi bi-x"></i>
     </button>
@@ -51,8 +45,9 @@ export default defineComponent({
   },
   data(): State {
     return {
-      newText: "",
-      formVisible: false
+      //изначально подставляется текст задачи базовый
+      newText: this.todo.text,
+      formVisible: false,
     };
   },
   methods: {

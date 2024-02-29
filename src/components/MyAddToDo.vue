@@ -5,7 +5,7 @@
         <i class="bi bi-x"></i>
       </button>
       <div class="text-input text-input--focus">
-        <input v-model="text" class="input" />
+        <input v-model="text" class="input" placeholder="To wash my car in the detailing center" />
       </div>
       <button class="button button--filled">Add task</button>
     </form>

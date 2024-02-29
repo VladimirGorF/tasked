@@ -1,8 +1,6 @@
 <template>
   <MyHeader />
-  <MyFilter 
-   :active-filter="activeFilter"
-   @set-filter="setFilter" />
+  <MyFilter :active-filter="activeFilter" @set-filter="setFilter" />
 
   <main class="app-main">
     <MyToDoList
@@ -16,7 +14,6 @@
   </main>
 
   <MyFooter :stats="getStats" />
-
 </template>
 
 <script lang="ts">
@@ -36,11 +33,12 @@ interface State {
 
 export default defineComponent({
   components: {
-     MyHeader,
-     MyFilter,
-     MyToDoList,
-     MyAddToDo,
-     MyFooter },
+    MyHeader,
+    MyFilter,
+    MyToDoList,
+    MyAddToDo,
+    MyFooter,
+  },
   data(): State {
     return {
       todoList: [
@@ -52,31 +50,36 @@ export default defineComponent({
     };
   },
   created() {
-    this.storageData();
+    this.getStorageData();
   },
   methods: {
     addTask(todo: Todo) {
+      //получаем данные из хранилища если они есть
+      this.getStorageData()
+      // записываем новые данные в массив
+      this.todoList.push(todo);
+      // и запишем изменения в LocalStorage
+      this.setStorageData();
+
+    },
+    getStorageData() {
       if (localStorage.getItem("tasksGorbunov")) {
         // если данные есть, то получаем их из хранилища
         let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
         this.todoList = data;
       }
-      // записываем новые данные
-      this.todoList.push(todo);
+    },
+    setStorageData() {
+      // запись изменений в локал storage
       const dataToSave = JSON.stringify(this.todoList);
       localStorage.setItem("tasksGorbunov", dataToSave);
-    },
-    storageData() {
-      if (localStorage.getItem("tasksGorbunov")) {
-        // если данные есть, то получаем их из хранилища
-        let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
-        this.todoList = data;
-      }
     },
     togglerToDo(id: number) {
       const targetToDo = this.todoList.find((todo: Todo) => todo.id === id);
       if (targetToDo) {
         targetToDo.completed = !targetToDo.completed;
+        // и запишем изменения в LocalStorage
+        this.setStorageData();
       }
     },
     removeTask(id: number) {
@@ -88,8 +91,7 @@ export default defineComponent({
       const targetTask = this.todoList.find((todo: Todo) => todo.id === id);
       targetTask!.text = newText;
       // и запишем изменения в ЛокалStorage
-      const dataToSave = JSON.stringify(this.todoList);
-      localStorage.setItem("tasksGorbunov", dataToSave);
+      this.setStorageData();
     },
     setFilter(filter: Filter) {
       this.activeFilter = filter;
@@ -111,10 +113,10 @@ export default defineComponent({
       };
     },
     activeTasks(): Todo[] {
-      return this.todoList.filter(todo => !todo.completed);
+      return this.todoList.filter((todo) => !todo.completed);
     },
     doneTasks(): Todo[] {
-      return this.todoList.filter(todo => todo.completed);
+      return this.todoList.filter((todo) => todo.completed);
     },
   },
 });
