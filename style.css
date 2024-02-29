@@ -125,6 +125,7 @@ button {
   font-weight: 400;
   font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
+  font-style: italic;
 }
 
 .text-input .input:focus {
