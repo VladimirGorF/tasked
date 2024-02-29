@@ -85,6 +85,8 @@ export default defineComponent({
     removeTask(id: number) {
       // отфильтруем массив чтобы в нем не было кликнутой задачи
       this.todoList = this.todoList.filter((todo: Todo) => todo.id !== id);
+      // и запишем изменения в LocalStorage
+      this.setStorageData();
     },
     changeTask(id: number, newText: string) {
       // найти нужную статью и изменить ее
