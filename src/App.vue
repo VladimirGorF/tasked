@@ -67,6 +67,8 @@ export default defineComponent({
         // если данные есть, то получаем их из хранилища
         let data: Todo[] = JSON.parse(localStorage.getItem("tasksGorbunov")!);
         this.todoList = data;
+      } else {
+        this.setStorageData()
       }
     },
     setStorageData() {
