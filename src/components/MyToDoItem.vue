@@ -12,10 +12,9 @@
     <button class="todo-item__remove-button" @click.stop="removeTask">
       <i class="bi bi-trash3"></i>
     </button>
-    <a href="add"><button class="todo-item__remove-button" @click.stop="showForm">
+    <button class="todo-item__remove-button" @click.stop="showForm">
       <i class="bi bi-pencil"></i>
-    </button></a>
-    
+    </button>
   </li>
   <!-- @submit.prevent предотвратит отправку формы -->
   <form class="add-todo__form" @submit.prevent="changeTask" v-if="formVisible">
