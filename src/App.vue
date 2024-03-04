@@ -1,19 +1,20 @@
 <template>
-  <MyHeader />
-  <MyFilter :active-filter="activeFilter" @set-filter="setFilter" />
-
-  <main class="app-main">
-    <MyToDoList
-      :todoList="todoListResult"
-      @toggler-to-do="togglerToDo"
-      @remove-task="removeTask"
-      @change-task="changeTask"
-    />
-
-    <MyAddToDo @add-task="addTask" />
-  </main>
-
-  <MyFooter :stats="getStats" />
+  <div class="appBox">
+    <div class="headerBox">
+      <MyHeader />
+      <MyFooter :stats="getStats" />
+    </div>
+    <MyFilter :active-filter="activeFilter" @set-filter="setFilter" />
+    <main class="app-main">
+      <MyToDoList
+        :todoList="todoListResult"
+        @toggler-to-do="togglerToDo"
+        @remove-task="removeTask"
+        @change-task="changeTask"
+      />
+    </main>
+  </div>
+  <MyAddToDo @add-task="addTask" />
 </template>
 
 <script lang="ts">
@@ -44,7 +45,16 @@ export default defineComponent({
       todoList: [
         { id: 0, text: "Deploy all projects into web", completed: true },
         { id: 1, text: "Show the basics of Vue3", completed: false },
-        { id: 2, text: "To buy a new chinise car", completed: false },
+        { id: 2, text: "To buy a new chinise car", completed: true },
+        { id: 3, text: "Deploy all projects into web", completed: false },
+        { id: 4, text: "Show the basics of Vue3", completed: true },
+        { id: 5, text: "To buy a new chinise car", completed: false },
+        { id: 6, text: "Deploy all projects into web", completed: true },
+        { id: 7, text: "Show the basics of Vue3", completed: false },
+        { id: 8, text: "To buy a new chinise car", completed: true },
+        { id: 9, text: "Deploy all projects into web", completed: false },
+        { id: 10, text: "Show the basics of Vue3", completed: true },
+        { id: 11, text: "To buy a new chinise car", completed: false },
       ],
       activeFilter: "All",
     };

@@ -1,5 +1,5 @@
 <template>
-  <li
+  <li v-if="!formVisible"
     class="todo-item"
     :class="{ 'todo-item--done': todo.completed }"
     @click="togglerToDo"
@@ -12,9 +12,10 @@
     <button class="todo-item__remove-button" @click.stop="removeTask">
       <i class="bi bi-trash3"></i>
     </button>
-    <button class="todo-item__remove-button" @click.stop="showForm">
+    <a href="add"><button class="todo-item__remove-button" @click.stop="showForm">
       <i class="bi bi-pencil"></i>
-    </button>
+    </button></a>
+    
   </li>
   <!-- @submit.prevent предотвратит отправку формы -->
   <form class="add-todo__form" @submit.prevent="changeTask" v-if="formVisible">
@@ -22,7 +23,7 @@
       <i class="bi bi-x"></i>
     </button>
     <div class="text-input text-input--focus">
-      <input v-model="newText" class="input" />
+      <textarea v-model="newText" class="input inputChange"></textarea> 
     </div>
     <button class="button button--filled" type="submit">Change</button>
   </form>
@@ -65,6 +66,7 @@ export default defineComponent({
     },
     changeTask() {
       this.$emit("changeTask", this.todo.id, this.newText);
+      this.closeForm();
     },
   },
   emits: {

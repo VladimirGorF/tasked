@@ -5,12 +5,16 @@
         <i class="bi bi-x"></i>
       </button>
       <div class="text-input text-input--focus">
-        <input v-model="text" class="input" placeholder="To wash my car in the detailing center" />
+        <textarea
+          v-model="text"
+          class="input"
+          placeholder="To wash my car in the detailing center"
+        ></textarea>
       </div>
-      <button class="button button--filled">Add task</button>
+      <button id="add" class="button button--filled">Add task</button>
     </form>
     <button v-else class="add-todo__show-form-button" @click="showForm">
-      <i class="bi bi-plus-lg"></i>
+      <a href="#add"><i class="bi bi-plus-lg"></i></a>
     </button>
   </section>
 </template>
@@ -38,15 +42,16 @@ export default defineComponent({
     },
     addTask() {
       // если текст задачи введен, то эмитим ее в APP
-      if(this.text){
+      if (this.text) {
         this.$emit("addTask", {
-        id: Date.now(),
-        text: this.text,
-        completed: false
-      });
+          id: Date.now(),
+          text: this.text,
+          completed: false,
+        });
       }
       // обнуляем текст
-      this.text = ''
+      this.text = "";
+      this.closeForm();
     },
   },
   emits: {
