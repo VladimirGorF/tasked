@@ -1,5 +1,6 @@
 <template>
-  <li v-if="!formVisible"
+  <li
+    v-if="!formVisible"
     class="todo-item"
     :class="{ 'todo-item--done': todo.completed }"
     @click="togglerToDo"
@@ -22,7 +23,7 @@
       <i class="bi bi-x"></i>
     </button>
     <div class="text-input text-input--focus">
-      <textarea v-model="newText" class="input inputChange"></textarea> 
+      <textarea v-model="newText" class="input inputChange"></textarea>
     </div>
     <button class="button button--filled" type="submit">Change</button>
   </form>
